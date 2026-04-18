@@ -8,6 +8,10 @@ public class ObjectPooler : MonoBehaviour
 
     private List<GameObject> objectPool;
 
+    private void Start()
+    {
+        InitializePool();
+    }
     private void InitializePool()
     {
         objectPool = new List<GameObject>();
@@ -17,7 +21,7 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
-    private GameObject GetPooledObject()
+    public GameObject GetPooledObject()
     {
         foreach (GameObject gameObject in objectPool)
         {
@@ -32,7 +36,7 @@ public class ObjectPooler : MonoBehaviour
 
     private GameObject CreateNewObject()
     {
-        GameObject obj = Instantiate(objectPrefab, Vector2.zero, Quaternion.identity);
+        GameObject obj = Instantiate(objectPrefab, transform);
         obj.SetActive(false);
         objectPool.Add(obj);
         return obj;
